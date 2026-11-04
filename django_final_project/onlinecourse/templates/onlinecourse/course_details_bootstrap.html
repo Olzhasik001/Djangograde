@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>{{ course.name }}</h2>
+        <div class="card-columns">
+            {% for lesson in course.lesson_set.all %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ lesson.title }}</h5>
+                    <p class="card-text">{{ lesson.content }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <form action="{% url 'onlinecourse:submit' course.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-success btn-block" value="Start/Submit Exam">
+        </form>
+    </div>
+</body>
+</html>
